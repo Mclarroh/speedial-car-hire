@@ -20,9 +20,9 @@
             background-color: #f9f9f9;
         }
         :root {
-            --primary: #3f6bc1; /* Blue from Metro */
-            --accent: #aa2727; /* Red from Metro */
-            --highlight: #65ddd0; /* Teal from Metro */
+            --primary: #3f6bc1;
+            --accent: #aa2727;
+            --highlight: #65ddd0;
             --secondary: #FFFFFF;
             --text-light: #FFFFFF;
             --text-dark: #333333;
@@ -50,10 +50,10 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px; /* Space between logo and text */
+            gap: 12px;
         }
         .logo img {
-            height: 50px; /* Adjust this value to make logo bigger/smaller */
+            height: 50px;
             width: auto;
             object-fit: contain;
         }
@@ -128,7 +128,7 @@
             font-weight: 600;
         }
         .btn-primary:hover {
-            background-color: darken(var(--accent), 10%);
+            background-color: #901f1f;
         }
         .vehicles {
             padding: 60px 0;
@@ -146,6 +146,8 @@
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
+            display: flex;
+            flex-direction: column;
         }
         .vehicle-card:hover {
             transform: translateY(-10px);
@@ -157,27 +159,50 @@
             object-fit: cover;
             aspect-ratio: 4 / 3;
         }
-        .vehicle-card h3 {
+        .vehicle-info {
             padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .vehicle-card h3 {
             font-family: 'Roboto', sans-serif;
             color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .vehicle-card .description {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            flex-grow: 1;
         }
         .price {
             font-weight: bold;
             color: var(--accent);
             margin-bottom: 15px;
         }
-        .btn-secondary {
+        .btn-secondary, .btn-book {
             display: inline-block;
-            background: var(--primary);
-            color: var(--text-light);
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 4px;
             transition: background 0.3s;
+            margin: 5px;
+        }
+        .btn-secondary {
+            background: var(--primary);
+            color: var(--text-light);
         }
         .btn-secondary:hover {
             background: var(--highlight);
+        }
+        .btn-book {
+            background: var(--accent);
+            color: var(--text-light);
+        }
+        .btn-book:hover {
+            background: #901f1f;
         }
         .section {
             padding: 60px 0;
@@ -199,6 +224,45 @@
             text-align: center;
             padding: 20px 0;
         }
+        .contact-info {
+            margin-bottom: 20px;
+            line-height: 2;
+        }
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 40px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            background-color: #20b358;
+            transform: scale(1.1);
+        }
+        .whatsapp-float i {
+            font-size: 40px;
+        }
+
         @media (max-width: 768px) {
             nav ul {
                 display: none;
@@ -221,13 +285,24 @@
                 flex-direction: column;
             }
             .logo img {
-                height: 40px; /* Slightly smaller on mobile */
+                height: 40px;
             }
             .logo h1 {
                 font-size: 1.5rem;
             }
+            .whatsapp-float {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .whatsapp-float i {
+                font-size: 36px;
+            }
         }
     </style>
+    <!-- Font Awesome for WhatsApp icon (only the icon we need) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <header aria-label="Site Header">
@@ -281,33 +356,58 @@
                 <div class="vehicle-grid">
                     <article class="vehicle-card" aria-labelledby="saloon-title">
                         <img src="images/saloon-car.jpg" alt="Saloon Car">
-                        <h3 id="saloon-title">Saloon Cars</h3>
-                        <p>From Ksh. 85,000/month</p>
-                        <a href="#detail" class="btn-secondary">View Details</a>
+                        <div class="vehicle-info">
+                            <h3 id="saloon-title">Saloon Cars</h3>
+                            <p class="description">Comfortable and fuel-efficient sedans like Toyota Axio, Premio, and Nissan Note. Perfect for city driving, business trips, and daily commutes in Nairobi. Spacious trunk, air conditioning, and reliable performance.</p>
+                            <p class="price">From Ksh. 85,000/month</p>
+                            <div>
+                                <a href="#booking" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
                     </article>
                     <article class="vehicle-card" aria-labelledby="suv-title">
                         <img src="images/suv.jpg" alt="SUV">
-                        <h3 id="suv-title">SUVs</h3>
-                        <p>From Ksh. 145,000/month</p>
-                        <a href="#detail" class="btn-secondary">View Details</a>
+                        <div class="vehicle-info">
+                            <h3 id="suv-title">SUVs</h3>
+                            <p class="description">Versatile mid-size SUVs such as Harrier, Rav4, and X-Trail. Ideal for families, small groups, and light off-road use. Ample space, higher ground clearance, and modern features for comfort.</p>
+                            <p class="price">From Ksh. 145,000/month</p>
+                            <div>
+                                <a href="#booking" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
                     </article>
                     <article class="vehicle-card" aria-labelledby="prado-title">
                         <img src="images/prado-4x4.jpg" alt="4x4 Prado">
-                        <h3 id="prado-title">4x4 Prado</h3>
-                        <p>From Ksh. 300,000/month</p>
-                        <a href="#detail" class="btn-secondary">View Details</a>
+                        <div class="vehicle-info">
+                            <h3 id="prado-title">4x4 Prado</h3>
+                            <p class="description">Powerful Toyota Land Cruiser Prado TX/TZ models with true 4x4 capability. Excellent for safaris, rough terrain, long-distance travel, and VIP transfers. Luxurious interior, high reliability, and superior off-road performance.</p>
+                            <p class="price">From Ksh. 300,000/month</p>
+                            <div>
+                                <a href="#booking" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
                     </article>
                     <article class="vehicle-card" aria-labelledby="van-title">
                         <img src="images/van-minibus.jpg" alt="Vans/Mini-buses">
-                        <h3 id="van-title">Vans/Mini-buses</h3>
-                        <p>Ideal for groups</p>
-                        <a href="#detail" class="btn-secondary">View Details</a>
+                        <div class="vehicle-info">
+                            <h3 id="van-title">Vans/Mini-buses</h3>
+                            <p class="description">Spacious 8-14 seater vans like Toyota Hiace and Noah. Great for group transfers, tours, weddings, and corporate shuttles. Comfortable seating, ample luggage space, and optional high-roof for extra headroom.</p>
+                            <p class="price">Ideal for groups – contact for rates</p>
+                            <div>
+                                <a href="#booking" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
                     </article>
                     <article class="vehicle-card" aria-labelledby="bus-title">
                         <img src="images/shuttle-bus.jpg" alt="Shuttle Buses">
-                        <h3 id="bus-title">Shuttle Buses</h3>
-                        <p>For larger groups</p>
-                        <a href="#detail" class="btn-secondary">View Details</a>
+                        <div class="vehicle-info">
+                            <h3 id="bus-title">Shuttle Buses</h3>
+                            <p class="description">Large 22-33 seater coaster and mini-coaches with air conditioning. Perfect for bigger groups, school trips, events, and airport shuttles. Reclining seats, entertainment systems, and safe, professional drivers available.</p>
+                            <p class="price">For larger groups – contact for rates</p>
+                            <div>
+                                <a href="#booking" class="btn-book">Book Now</a>
+                            </div>
+                        </div>
                     </article>
                 </div>
             </div>
@@ -344,15 +444,15 @@
         <section id="contact" class="contact section" aria-labelledby="contact-title">
             <div class="container">
                 <h2 id="contact-title">Contact Us</h2>
-                <p>We’d Love to hear from you
-We are located in the heart of the Nairobi CBD; 30 minutes from Jomo Kenyatta International Airport.
-We also do Airport/ home/office delivery within Nairobi
- Our Office Address
-, Nairobi
-Enjoy seamless services in Mombasa, Kisumu, Nakuru and Eldoret.
-Phone / WhatsApp: +254 704 018880
-E-mail: bookings@speedialcarhireservices.com or operations@speedialcarhireservices.com
-</p>
+                <div class="contact-info">
+                    <p>We’d love to hear from you!</p>
+                    <p>We are located in the heart of Nairobi CBD; 30 minutes from Jomo Kenyatta International Airport.</p>
+                    <p>We also offer airport/home/office delivery within Nairobi.</p>
+                    <p>Enjoy seamless services in Mombasa, Kisumu, Nakuru, and Eldoret.</p>
+                    <p><strong>Phone / WhatsApp:</strong> <a href="tel:+254741465269">+254 741 465269</a> | <a href="tel:+254704018880">+254 704 018880</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:speeddiallimited@gmail.com">speeddiallimited@gmail.com</a> | <a href="mailto:bookings@speedialcarhireservices.com">bookings@speedialcarhireservices.com</a> | <a href="mailto:operations@speedialcarhireservices.com">operations@speedialcarhireservices.com</a></p>
+                    <p><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1BBTtCzb5A/?mibextid=wwXIfr" target="_blank">Follow us on Facebook</a></p>
+                </div>
                 <form id="contact-form">
                     <label for="name">Name:</label>
                     <input type="text" id="name" required>
@@ -373,6 +473,9 @@ E-mail: bookings@speedialcarhireservices.com or operations@speedialcarhireservic
                         <option>Select</option>
                         <option>Saloon</option>
                         <option>SUV</option>
+                        <option>4x4 Prado</option>
+                        <option>Van/Mini-bus</option>
+                        <option>Shuttle Bus</option>
                     </select>
                     <label for="dates">Dates:</label>
                     <input type="text" id="dates" placeholder="Start - End Date" required>
@@ -386,6 +489,12 @@ E-mail: bookings@speedialcarhireservices.com or operations@speedialcarhireservic
             <p>&copy; 2025 Speedial. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Icon -->
+    <a href="https://wa.me/254741465269" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script>
         // Inline JS: Merged interactivity from previous script
         document.addEventListener('DOMContentLoaded', () => {
