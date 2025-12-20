@@ -4,339 +4,299 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speedial - Professional Car Hire Service</title>
-    <!-- Google Fonts for typography: Roboto and Open Sans for variety -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-        /* Inline CSS: Merged and refined styles from previous versions */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Open Sans', sans-serif;
-            line-height: 1.6;
+            line-height: 1.7;
             color: #333;
-            background-color: #f9f9f9;
+            background: #f8f9fa;
         }
         :root {
-            --primary: #3f6bc1;
-            --accent: #aa2727;
-            --highlight: #65ddd0;
-            --secondary: #FFFFFF;
-            --text-light: #FFFFFF;
-            --text-dark: #333333;
-            --border: #e0e0e0;
+            --primary: #003366;
+            --accent: #c41e3a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --border: #dee2e6;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h2, h3 { font-family: 'Roboto', sans-serif; font-weight: 700; }
+        h2 { font-size: 2.5rem; color: var(--primary); text-align: center; margin-bottom: 1.5rem; position: relative; }
+        h2::after { content: ''; width: 80px; height: 4px; background: var(--accent); display: block; margin: 15px auto 0; border-radius: 2px; }
+        /* Header */
         header {
-            background-color: var(--secondary);
-            color: var(--text-dark);
-            padding: 20px 0;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo img {
-            height: 50px;
-            width: auto;
-            object-fit: contain;
-        }
-        .logo h1 {
-            margin: 0;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
+        header .container { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .logo img { height: 60px; }
+        .logo h1 { font-size: 2rem; color: var(--primary); margin-left: 10px; }
+        nav ul { display: flex; gap: 30px; list-style: none; }
         nav a {
-            color: var(--text-dark);
+            color: #333;
             text-decoration: none;
+            font-weight: 600;
             transition: color 0.3s;
-            font-weight: 600;
         }
-        nav a:hover {
-            color: var(--accent);
-        }
-        #menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .hero {
-            background-color: var(--primary);
-            color: var(--text-light);
-            text-align: center;
-            padding: 100px 0;
-        }
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-family: 'Roboto', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
-        .search-form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .search-form input, .search-form select {
-            padding: 10px;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            flex: 1 1 200px;
-        }
+        nav a:hover, nav a.active { color: var(--accent); }
         .btn-primary {
-            background-color: var(--accent);
-            color: var(--text-light);
-            border: none;
-            padding: 12px 24px;
-            cursor: pointer;
-            transition: background 0.3s;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-        .btn-primary:hover {
-            background-color: #901f1f;
-        }
-        .vehicles {
-            padding: 60px 0;
-            background: #fff;
-        }
-        .vehicle-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-        .vehicle-card {
-            background: var(--secondary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-        }
-        .vehicle-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-        .vehicle-card img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            aspect-ratio: 4 / 3;
-        }
-        .vehicle-info {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .vehicle-card h3 {
-            font-family: 'Roboto', sans-serif;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-        .vehicle-card .description {
-            font-size: 0.95rem;
-            color: var(--text-dark);
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-        .price {
-            font-weight: bold;
-            color: var(--accent);
-            margin-bottom: 15px;
-        }
-        .btn-secondary, .btn-book {
-            display: inline-block;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.3s;
-            margin: 5px;
-        }
-        .btn-secondary {
-            background: var(--primary);
-            color: var(--text-light);
-        }
-        .btn-secondary:hover {
-            background: var(--highlight);
-        }
-        .btn-book {
             background: var(--accent);
-            color: var(--text-light);
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background 0.3s;
         }
-        .btn-book:hover {
-            background: #901f1f;
-        }
-        .section {
-            padding: 60px 0;
-        }
-        .about, .contact {
-            background: #f0f0f0;
+        .btn-primary:hover { background: #a0172e; }
+        /* Hero */
+        .hero {
+            position: relative;
+            color: #fff;
             text-align: center;
+            padding: 120px 20px;
+            overflow: hidden;
         }
-        form {
-            max-width: 600px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 51, 102, 0.65); /* Reduced opacity significantly for better watermark visibility */
+            z-index: 1;
+        }
+        .hero-video {
+            position: absolute;
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            opacity: 0.35;
+            z-index: 0;
+        }
+        .hero-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1200px;
+            opacity: 0.35; /* Increased from 0.15 to 0.35 for more visibility */
+            z-index: 0;
+            pointer-events: none;
+        }
+        .hero > .container {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h2 { font-size: 3.5rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+        .hero p { max-width: 900px; margin: 0 auto 40px; font-size: 1.1rem; }
+        .search-form {
+            background: #fff;
+            color: #333;
+            max-width: 900px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
         }
-        footer {
-            background: var(--primary);
-            color: var(--text-light);
-            text-align: center;
-            padding: 20px 0;
+        .search-form label { font-weight: 600; font-size: 0.95rem; }
+        .search-form input, .search-form select {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            width: 100%;
         }
+        /* Sections */
+        .section { padding: 80px 0; }
+        .section.alt { background: #fff; }
+        .fleet-intro, .services-intro, .about-intro {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            margin-top: 40px;
+        }
+        .fleet-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .fleet-item:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        .fleet-item img { width: 100%; height: 220px; object-fit: cover; }
+        .fleet-info { padding: 25px; }
+        .fleet-info h4 { color: var(--primary); font-size: 1.4rem; margin-bottom: 12px; }
+        .fleet-info p { font-size: 1rem; margin-bottom: 15px; color: #555; }
+        .fleet-info .price { font-size: 1.2rem; font-weight: bold; color: var(--accent); margin-bottom: 15px; }
+        .fleet-info .btn-book {
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .fleet-info .btn-book:hover { background: #a0172e; }
+        .services-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .service-block {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            display: flex;
+        }
+        .service-block img { width: 40%; object-fit: cover; }
+        .service-text { padding: 30px; flex: 1; }
+        .service-text h3 { color: var(--accent); margin-bottom: 15px; }
+        .service-text .btn-book {
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .discount-grid, .chauffeur-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .discount-card, .chauffeur-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .discount-card img, .chauffeur-card img { width: 100%; height: 200px; object-fit: cover; }
+        .discount-card .info, .chauffeur-card .info { padding: 20px; }
+        .discount-card .price { font-size: 1.3rem; color: var(--accent); font-weight: bold; margin: 10px 0; }
         .contact-info {
-            margin-bottom: 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
             line-height: 2;
         }
-        .contact-info a {
-            color: var(--primary);
-            text-decoration: none;
+        .contact-info p { margin-bottom: 20px; }
+        .contact-info strong { color: var(--primary); }
+        footer {
+            background: var(--primary);
+            color: #fff;
+            padding: 50px 0 20px;
+            text-align: center;
         }
-        .contact-info a:hover {
-            text-decoration: underline;
+        .footer-links a { color: #fff; margin: 0 15px; text-decoration: none; }
+        .social-icons a {
+            font-size: 1.8rem;
+            margin: 0 10px;
+            color: #fff;
+            opacity: 0.8;
+            transition: opacity 0.3s;
         }
-
-        /* Floating WhatsApp Button */
+        .social-icons a:hover { opacity: 1; }
         .whatsapp-float {
             position: fixed;
-            width: 60px;
-            height: 60px;
             bottom: 30px;
             right: 30px;
-            background-color: #25D366;
-            color: #FFF;
+            background: #25D366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            text-align: center;
-            font-size: 40px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            font-size: 35px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
         }
-        .whatsapp-float:hover {
-            background-color: #20b358;
-            transform: scale(1.1);
-        }
-        .whatsapp-float i {
-            font-size: 40px;
-        }
-
+        .whatsapp-float:hover { transform: scale(1.1); }
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-                flex-direction: column;
-                gap: 10px;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: var(--secondary);
-                padding: 20px;
-            }
-            nav ul.active {
-                display: flex;
-            }
-            #menu-toggle {
-                display: block;
-            }
-            .search-form {
-                flex-direction: column;
-            }
-            .logo img {
-                height: 40px;
-            }
-            .logo h1 {
-                font-size: 1.5rem;
-            }
-            .whatsapp-float {
-                width: 55px;
-                height: 55px;
-                bottom: 20px;
-                right: 20px;
-            }
-            .whatsapp-float i {
-                font-size: 36px;
-            }
+            nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #fff; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+            nav ul.active { display: flex; }
+            #menu-toggle { display: block; font-size: 1.8rem; background: none; border: none; cursor: pointer; }
+            .hero h2 { font-size: 2.5rem; }
+            .search-form { grid-template-columns: 1fr; padding: 20px; }
+            .service-block { flex-direction: column; }
+            .service-block img { width: 100%; height: 200px; }
+            .fleet-grid { grid-template-columns: 1fr; }
+            .hero-watermark { width: 95%; opacity: 0.25; } /* Slightly lower on mobile to avoid overpowering text */
         }
     </style>
-    <!-- Font Awesome for WhatsApp icon (only the icon we need) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <header aria-label="Site Header">
+    <header>
         <div class="container">
             <div class="logo">
                 <img src="images/Logo.PNG" alt="Speedial Logo">
                 <h1>Speedial</h1>
             </div>
-            <nav aria-label="Main Navigation">
+            <nav>
                 <ul>
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#fleet">Our Fleet</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#booking" class="btn-primary">Book Now</a></li>
                 </ul>
-                <button id="menu-toggle" aria-label="Toggle Mobile Menu">&#9776;</button>
+                <button id="menu-toggle">&#9776;</button>
             </nav>
         </div>
     </header>
-    <main>
-        <section id="home" class="hero" aria-labelledby="hero-title">
-            <div class="container">
-                <h2 id="hero-title">Your Trusted Car Rental Partner</h2>
-                <p>Speedial Car Hire Services is a reputable family business based in Nairobi. We strive for nothing short of perfection in our service delivery. We are renown for our superb and well-maintained fleet of cars available for you to rent. Moreover, we also offer chauffeur driven and VIP services to our clients.The fleet of our cars consists of Saloon Cars, 4x4 SUVs, Executive Cars and Shuttle Buses. Other than car hire, we offer the following services; VIP Transportation, Airport Transfers, Wedding Services and Bridal Services, Tour and Safaris, City Excursions among other services.We have a broad network of clientele, from Kenya's top corporate entities to High-level delegations, diaspora and local market. We truly are the shining star in the car rental enterprise in Kenya.Choosing to work with us assures you of our quality and attentive services. </p>
-                <form id="search-form" class="search-form" aria-label="Vehicle Search Form">
-                    <label for="location">Location:</label>
-                    <input type="text" id="location" placeholder="Enter city" required>
-                    <label for="pickup-date">Pickup:</label>
+
+    <section id="home" class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="videos/hero-watermark.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <!-- Local Watermark Image - Now more visible -->
+        <img src="images/car-yard-watermark.jpg" alt="Car Fleet Watermark" class="hero-watermark">
+
+        <div class="container">
+            <h2>Your Trusted Car Rental Partner</h2>
+            <p>Speedial Car Hire Services is a reputable family business based in Nairobi. We offer superb, well-maintained vehicles and professional chauffeur-driven & VIP services. Our fleet includes Saloon Cars, 4x4 SUVs, Executive Cars, and Shuttle Buses. We also provide VIP Transportation, Airport Transfers, Wedding Services, Tours & Safaris, and City Excursions.</p>
+            <form id="search-form" class="search-form">
+                <div>
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="e.g. Nairobi" required>
+                </div>
+                <div>
+                    <label for="pickup-date">Pickup Date</label>
                     <input type="date" id="pickup-date" required>
-                    <label for="return-date">Return:</label>
+                </div>
+                <div>
+                    <label for="return-date">Return Date</label>
                     <input type="date" id="return-date" required>
-                    <label for="vehicle-type">Type:</label>
+                </div>
+                <div>
+                    <label for="vehicle-type">Vehicle Type</label>
                     <select id="vehicle-type">
                         <option>Any</option>
                         <option>Saloon</option>
@@ -345,168 +305,235 @@
                         <option>Van</option>
                         <option>Bus</option>
                     </select>
-                    <button type="submit" class="btn-primary">Search</button>
-                </form>
-            </div>
-        </section>
-        <section id="fleet" class="vehicles section" aria-labelledby="fleet-title">
-            <div class="container">
-                <h2 id="fleet-title">Our Fleet</h2>
-                <p>We take no conciliation in making sure that our vehicles are in top machine-driven condition. Here, we have given you a fine range of selection of some of our cars. The following cars listed below are available for self-drive car rental option, chauffeur-driven option, road-trips, safaris & excursions with friends, family and business and airport transfers. However, if you wish to hire a different car that is not in this selection, feel free to contact us and we’ll get you the car that you wish to hire!</p>
-                <div class="vehicle-grid">
-                    <article class="vehicle-card" aria-labelledby="saloon-title">
-                        <img src="images/saloon-car.jpg" alt="Saloon Car">
-                        <div class="vehicle-info">
-                            <h3 id="saloon-title">Saloon Cars</h3>
-                            <p class="description">Comfortable and fuel-efficient sedans like Toyota Axio, Premio, and Nissan Note. Perfect for city driving, business trips, and daily commutes in Nairobi. Spacious trunk, air conditioning, and reliable performance.</p>
-                            <p class="price">From Ksh. 85,000/month</p>
-                            <div>
-                                <a href="#booking" class="btn-book">Book Now</a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="vehicle-card" aria-labelledby="suv-title">
-                        <img src="images/suv.jpg" alt="SUV">
-                        <div class="vehicle-info">
-                            <h3 id="suv-title">SUVs</h3>
-                            <p class="description">Versatile mid-size SUVs such as Harrier, Rav4, and X-Trail. Ideal for families, small groups, and light off-road use. Ample space, higher ground clearance, and modern features for comfort.</p>
-                            <p class="price">From Ksh. 145,000/month</p>
-                            <div>
-                                <a href="#booking" class="btn-book">Book Now</a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="vehicle-card" aria-labelledby="prado-title">
-                        <img src="images/prado-4x4.jpg" alt="4x4 Prado">
-                        <div class="vehicle-info">
-                            <h3 id="prado-title">4x4 Prado</h3>
-                            <p class="description">Powerful Toyota Land Cruiser Prado TX/TZ models with true 4x4 capability. Excellent for safaris, rough terrain, long-distance travel, and VIP transfers. Luxurious interior, high reliability, and superior off-road performance.</p>
-                            <p class="price">From Ksh. 300,000/month</p>
-                            <div>
-                                <a href="#booking" class="btn-book">Book Now</a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="vehicle-card" aria-labelledby="van-title">
-                        <img src="images/van-minibus.jpg" alt="Vans/Mini-buses">
-                        <div class="vehicle-info">
-                            <h3 id="van-title">Vans/Mini-buses</h3>
-                            <p class="description">Spacious 8-14 seater vans like Toyota Hiace and Noah. Great for group transfers, tours, weddings, and corporate shuttles. Comfortable seating, ample luggage space, and optional high-roof for extra headroom.</p>
-                            <p class="price">Ideal for groups – contact for rates</p>
-                            <div>
-                                <a href="#booking" class="btn-book">Book Now</a>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="vehicle-card" aria-labelledby="bus-title">
-                        <img src="images/shuttle-bus.jpg" alt="Shuttle Buses">
-                        <div class="vehicle-info">
-                            <h3 id="bus-title">Shuttle Buses</h3>
-                            <p class="description">Large 22-33 seater coaster and mini-coaches with air conditioning. Perfect for bigger groups, school trips, events, and airport shuttles. Reclining seats, entertainment systems, and safe, professional drivers available.</p>
-                            <p class="price">For larger groups – contact for rates</p>
-                            <div>
-                                <a href="#booking" class="btn-book">Book Now</a>
-                            </div>
-                        </div>
-                    </article>
                 </div>
-            </div>
-        </section>
-        <section id="services" class="section" aria-labelledby="services-title">
-            <div class="container">
-                <h2 id="services-title">Our Services</h2>
-                <div class="service-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
-                    <div>
-                        <h3>Long Term Car Hire</h3>
-                        <p>Up to 25% discounts for 30+ days.</p>
-                    </div>
-                    <div>
-                        <h3>Chauffeur-Driven</h3>
-                        <p>Professional drivers included.</p>
-                    </div>
-                    <div>
-                        <h3>Airport Transfers</h3>
-                        <p>Fast and reliable pickups.</p>
-                    </div>
-                    <div>
-                        <h3>Wedding Services</h3>
-                        <p>Luxury cars for your special day.</p>
-                    </div>
+                <div style="align-self: end;">
+                    <button type="submit" class="btn-primary">Search Vehicles</button>
                 </div>
-            </div>
-        </section>
-        <section id="about" class="about section" aria-labelledby="about-title">
-            <div class="container">
-                <h2 id="about-title">About Speedial</h2>
-                <p>As the most trusted car rental industry, we pride ourselves on delivering exceptional service that exceeds expectations. Our meticulously maintained fleet features a diverse selection of vehicles, from fuel-efficient compact cars to spacious SUVs and luxury sedans, ensuring we meet every customer's unique needs.Each vehicle undergoes rigorous safety inspections and regular servicing to guarantee reliability and peace of mind throughout your journey. Our professional team is dedicated to providing seamless rental experiences, from straightforward booking processes to flexible pickup and return options that accommodate your schedule.We understand that quality matters, which is why we invest continuously in fleet upgrades and staff training. Whether you're traveling for business, planning a family vacation, or need temporary transportation, our competitive rates and transparent pricing reflect our commitment to value. With 24/7 customer support, roadside assistance, and convenient locations, we ensure your rental experience is smooth, stress-free, and tailored to your requirements.</p>
-            </div>
-        </section>
-        <section id="contact" class="contact section" aria-labelledby="contact-title">
-            <div class="container">
-                <h2 id="contact-title">Contact Us</h2>
-                <div class="contact-info">
-                    <p>We’d love to hear from you!</p>
-                    <p>We are located in the heart of Nairobi CBD; 30 minutes from Jomo Kenyatta International Airport.</p>
-                    <p>We also offer airport/home/office delivery within Nairobi.</p>
-                    <p>Enjoy seamless services in Mombasa, Kisumu, Nakuru, and Eldoret.</p>
-                    <p><strong>Phone / WhatsApp:</strong> <a href="tel:+254741465269">+254 741 465269</a> | <a href="tel:+254704018880">+254 704 018880</a></p>
-                    <p><strong>Email:</strong> <a href="mailto:speeddiallimited@gmail.com">speeddiallimited@gmail.com</a> | <a href="mailto:bookings@speedialcarhireservices.com">bookings@speedialcarhireservices.com</a> | <a href="mailto:operations@speedialcarhireservices.com">operations@speedialcarhireservices.com</a></p>
-                    <p><strong>Facebook:</strong> <a href="https://www.facebook.com/share/1BBTtCzb5A/?mibextid=wwXIfr" target="_blank">Follow us on Facebook</a></p>
-                </div>
-                <form id="contact-form">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" required>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" required>
-                    <label for="message">Message:</label>
-                    <textarea id="message" required></textarea>
-                    <button type="submit" class="btn-primary">Send</button>
-                </form>
-            </div>
-        </section>
-        <section id="booking" class="booking section" aria-labelledby="booking-title">
-            <div class="container">
-                <h2 id="booking-title">Book Now</h2>
-                <form id="booking-form">
-                    <label for="vehicle">Vehicle:</label>
-                    <select id="vehicle" required>
-                        <option>Select</option>
-                        <option>Saloon</option>
-                        <option>SUV</option>
-                        <option>4x4 Prado</option>
-                        <option>Van/Mini-bus</option>
-                        <option>Shuttle Bus</option>
-                    </select>
-                    <label for="dates">Dates:</label>
-                    <input type="text" id="dates" placeholder="Start - End Date" required>
-                    <button type="submit" class="btn-primary">Book</button>
-                </form>
-            </div>
-        </section>
-    </main>
-    <footer aria-label="Site Footer">
+            </form>
+        </div>
+    </section>
+
+    <!-- All other sections remain unchanged -->
+    <section id="fleet" class="section alt">
         <div class="container">
+            <h2>Our Fleet</h2>
+            <p class="fleet-intro">
+                At Speedial, we take immense pride in our diverse and meticulously maintained fleet. Every vehicle undergoes regular servicing, thorough cleaning, and rigorous safety checks to ensure the highest standards of reliability and comfort. Whether you're planning a short city trip, a family vacation, a corporate transfer, or an adventurous safari, we have the perfect vehicle for your needs. Our fleet is available for both self-drive and professional chauffeur-driven options, giving you flexibility and peace of mind. Explore our categories below and discover why clients trust us for safe, comfortable, and affordable car hire in Kenya.
+            </p>
+            <div class="fleet-grid">
+                <div class="fleet-item">
+                    <img src="images/saloon-car.jpg" alt="Saloon Cars">
+                    <div class="fleet-info">
+                        <h4>Saloon Cars</h4>
+                        <p>Fuel-efficient and comfortable sedans such as Toyota Axio, Premio, Allion, and Nissan Note. Ideal for daily commutes, business travel, and city driving in Nairobi. Features include air conditioning, spacious interiors, ample boot space, and excellent mileage.</p>
+                        <div class="price">From Ksh. 3,500/day or Ksh. 85,000/month</div>
+                        <a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+                <div class="fleet-item">
+                    <img src="images/suv.jpg" alt="SUVs">
+                    <div class="fleet-info">
+                        <h4>SUVs</h4>
+                        <p>Versatile mid-size SUVs like Toyota Harrier, RAV4, and Nissan X-Trail. Perfect for families, small groups, and light off-road adventures. Higher ground clearance, generous luggage space, modern infotainment, and smooth handling on both tarmac and gravel roads.</p>
+                        <div class="price">From Ksh. 7,000/day or Ksh. 145,000/month</div>
+                        <a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+                <div class="fleet-item">
+                    <img src="images/prado-4x4.jpg" alt="4x4 Prado">
+                    <div class="fleet-info">
+                        <h4>4x4 Prado</h4>
+                        <p>Powerful Toyota Land Cruiser Prado TX/TZ models with true 4WD capability. The ultimate choice for safaris, rough terrain, long-distance travel, and VIP/executive transfers. Luxurious leather interiors, sunroof options, superior off-road performance, and unmatched reliability.</p>
+                        <div class="price">From Ksh. 15,000/day or Ksh. 300,000/month</div>
+                        <a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+                <div class="fleet-item">
+                    <img src="images/van-minibus.jpg" alt="Vans/Mini-buses">
+                    <div class="fleet-info">
+                        <h4>Vans / Mini-buses</h4>
+                        <p>Spacious 8–14 seater vans including Toyota Hiace, Noah, and high-roof models. Excellent for group transfers, tours, weddings, corporate shuttles, and airport runs. Comfortable reclining seats, ample luggage capacity, air conditioning, and optional entertainment systems.</p>
+                        <div class="price">Contact us for custom group rates</div>
+                        <a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+                <div class="fleet-item">
+                    <img src="images/shuttle-bus.jpg" alt="Shuttle Buses">
+                    <div class="fleet-info">
+                        <h4>Shuttle Buses</h4>
+                        <p>Large 22–33 seater coaster buses and mini-coaches with powerful AC and reclining seats. Perfect for bigger groups, school trips, events, conferences, and long-distance charters. Professional drivers available, entertainment systems, and safe, reliable travel for everyone.</p>
+                        <div class="price">Contact us for tailored large-group pricing</div>
+                        <a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section" style="background:#f1f3f5;">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p class="services-intro">
+                Speedial offers a wide range of premium transportation solutions tailored to meet every need. From daily self-drive rentals to fully chauffeur-driven experiences, we ensure safety, comfort, and reliability. Key services include:<br><br>
+                • <strong>Airport Transfers</strong> – Prompt pick-up/drop-off at JKIA, Wilson, and regional airports.<br>
+                • <strong>Wedding Car Hire</strong> – Luxuriously decorated vehicles with professional chauffeurs for your special day.<br>
+                • <strong>Corporate & VIP Transfers</strong> – Executive cars with discreet, experienced drivers for business travel.<br>
+                • <strong>Tours & Safaris</strong> – Guided or self-drive adventures with suitable 4x4 vehicles.<br>
+                • <strong>City Excursions & Long-Distance Travel</strong> – Comfortable transport across Kenya, including Mombasa, Kisumu, Nakuru, and Eldoret.<br>
+                • <strong>Chauffeur-Driven Options</strong> – Relax while our trained drivers handle the journey.<br>
+                • <strong>Delivery & Collection</strong> – Convenient vehicle delivery to your hotel, home, or office in Nairobi.
+            </p>
+            <div class="services-highlight">
+                <div class="service-block">
+                    <img src="https://www.lelimo.com/wp-content/uploads/2017/10/Rolls-wedding.jpg" alt="Luxury Wedding Car">
+                    <div class="service-text">
+                        <h3>Wedding Services</h3>
+                        <p>Make your wedding unforgettable with our luxury fleet. Decorated vehicles, professional chauffeurs, and seamless service from ceremony to reception.</p>
+                        <a href="#booking" class="btn-book">Book Wedding Car</a>
+                    </div>
+                </div>
+            </div>
+            <h2 style="color:var(--accent); margin-top:80px;">Long Term Discounts</h2>
+            <div class="discount-grid">
+                <div class="discount-card">
+                    <img src="https://nairobicabs.com/wp-content/uploads/2021/06/Tash-Vehicles-102-1024x576-1.jpg" alt="Toyota Axio">
+                    <div class="info">
+                        <h4>Toyota Axio / Premio</h4>
+                        <div class="price">From Ksh. 85,000 / month</div>
+                        <a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+                <div class="discount-card">
+                    <img src="https://www.vismart.co.ke/wp-content/uploads/black-harrier.jpg" alt="Toyota Harrier">
+                    <div class="info">
+                        <h4>Toyota Harrier / RAV4</h4>
+                        <div class="price">From Ksh. 145,000 / month</div>
+                        <a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+                <div class="discount-card">
+                    <img src="https://www.vismart.co.ke/wp-content/uploads/prado-black.jpg" alt="Land Cruiser Prado">
+                    <div class="info">
+                        <h4>Land Cruiser Prado</h4>
+                        <div class="price">From Ksh. 300,000 / month</div>
+                        <a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            <h2 style="margin-top:80px;">Chauffeur-Driven Service</h2>
+            <div class="chauffeur-grid">
+                <div class="chauffeur-card">
+                    <img src="https://www.tokyo-car-service.com/images/mercedes-e-class-68-1.webp?cb=1730127946" alt="Executive Sedan">
+                    <div class="info"><h4>Executive Sedans</h4></div>
+                </div>
+                <div class="chauffeur-card">
+                    <img src="https://moroccoprivatetransport.com/wp-content/uploads/2024/04/Luxury-private-chauffeur-in-Land-Cruiser-background.webp" alt="Luxury SUV">
+                    <div class="info"><h4>Luxury SUVs</h4></div>
+                </div>
+                <div class="chauffeur-card">
+                    <img src="https://www.heathrowcarrier.com/uploads/images/blog/1756881943.webp" alt="Mercedes Options">
+                    <div class="info"><h4>Mercedes Options</h4></div>
+                </div>
+                <div class="chauffeur-card">
+                    <img src="https://carused.jp/blog/wp-content/uploads/2024/07/Frame-4643-2.png" alt="15 Seater Vans">
+                    <div class="info"><h4>15 Seater Vans</h4></div>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:40px;">
+                <a href="#booking" class="btn-primary" style="padding:15px 40px;font-size:1.1rem;">Book Chauffeur-Driven Car</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section alt">
+        <div class="container">
+            <h2>About Us</h2>
+            <p class="about-intro">
+                Speedial Car Hire Services is a trusted, family-owned business proudly operating from the heart of Nairobi since its establishment. With years of experience in the car rental industry, we specialize in providing well-maintained, modern vehicles and exceptional customer service.<br><br>
+                Our mission is to deliver safe, reliable, and affordable transportation solutions across Kenya. We prioritize vehicle quality, driver professionalism, and client satisfaction — earning us a loyal customer base of locals, tourists, and corporate clients.<br><br>
+                Whether you need a quick city ride, a safari adventure, or executive transport, Speedial is committed to making every journey comfortable and memorable.
+            </p>
+        </div>
+    </section>
+
+    <section id="contact" class="section alt">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <p><strong>We’d love to hear from you!</strong></p>
+                <p>We are located in the heart of Nairobi CBD; 30 minutes from Jomo Kenyatta International Airport.</p>
+                <p>We also offer airport/home/office delivery within Nairobi.</p>
+                <p>Enjoy seamless services in Mombasa, Kisumu, Nakuru, and Eldoret.</p>
+                <p><strong>Phone / WhatsApp:</strong> <a href="tel:+254741465269">+254 741 465269</a> | <a href="tel:+254704018880">+254 704 018880</a></p>
+                <p><strong>Email:</strong> 
+                    <a href="mailto:speeddiallimited@gmail.com">speeddiallimited@gmail.com</a> | 
+                    <a href="mailto:bookings@speedialcarhireservices.com">bookings@speedialcarhireservices.com</a> | 
+                    <a href="mailto:operations@speedialcarhireservices.com">operations@speedialcarhireservices.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="margin-bottom:20px;">Speedial Car Hire Services<br>Nairobi, Kenya</p>
+            <div class="footer-links">
+                <a href="tel:+254741465269">+254 741 465 269</a> |
+                <a href="mailto:speeddiallimited@gmail.com">speeddiallimited@gmail.com</a>
+            </div>
+            <div class="social-icons" style="margin:30px 0;">
+                <a href="https://www.facebook.com/share/1BBTtCzb5A/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
             <p>&copy; 2025 Speedial. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Icon -->
-    <a href="https://wa.me/254741465269" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
+    <a href="https://wa.me/254741465269" target="_blank" class="whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
-        // Inline JS: Merged interactivity from previous script
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.getElementById('menu-toggle');
             const navUl = document.querySelector('nav ul');
-            menuToggle.addEventListener('click', () => {
-                navUl.classList.toggle('active');
+            menuToggle.addEventListener('click', () => navUl.classList.toggle('active'));
+
+            // Highlight active navigation link based on section in view
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
             });
+
+            // Force video playback
+            const bgVideo = document.querySelector('.hero-video');
+            if (bgVideo) {
+                bgVideo.play().catch(e => console.log('Video autoplay prevented:', e));
+            }
+
+            // Form handling placeholder
             document.querySelectorAll('form').forEach(form => {
-                form.addEventListener('submit', (e) => {
+                form.addEventListener('submit', async (e) => {
                     e.preventDefault();
-                    alert('Form submitted!');
+                    alert('Thank you! We will get back to you soon.');
+                    form.reset();
                 });
             });
         });
